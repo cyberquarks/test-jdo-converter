@@ -1,5 +1,6 @@
 package org.datanucleus.test;
 
+import java.time.LocalTime;
 import java.util.*;
 import org.junit.*;
 import javax.jdo.*;
@@ -23,6 +24,21 @@ public class SimpleTest
             tx.begin();
 
             // [INSERT code here to persist object required for testing]
+            Schedule schedule = new Schedule();
+            schedule.setDay("monday");
+            schedule.setOpens(LocalTime.parse("07:00").toString());
+            schedule.setCloses(LocalTime.parse("11:00").toString());
+
+            Hub hub = new Hub();
+            hub.setName("YogaClub");
+            hub.setSchedules(Arrays.asList(schedule));
+
+            // NOTE: This test is meant to test the converter
+            // so, the database "row" must be checked for actual stored value,
+            // in thi case we used MongoDB and the resulting document stored is this:
+            // {"_id":{"$oid":"5fe6bb84e06a029ddcc56c15"},"name":"YogaClub","schedules":[{"opens":"07:00","day":"monday","closes":"11:00"}]}
+            // which is whe "opens" and "closes" field should have been a Long value
+            pm.makePersistent(hub);
 
             tx.commit();
         }

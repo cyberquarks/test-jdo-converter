@@ -44,6 +44,12 @@
             <version>[${dn.datastore.min.ver}, ${dn.datastore.max.ver})</version>
         </dependency>
 
+        <dependency>
+            <groupId>org.datanucleus</groupId>
+            <artifactId>datanucleus-mongodb</artifactId>
+            <version>[${dn.datastore.min.ver}, ${dn.datastore.max.ver})</version>
+        </dependency>
+
         <!-- Change to the datastore driver required for your datastore -->
         <dependency>
             <groupId>com.h2database</groupId>
